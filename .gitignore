@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor settings
+.vscode/
+.idea/
+*.swp
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Environment variables (keep API keys safe!)
+.env
+.env.local
+.env.*.local
+
+# Optional cache
+.cache/
+*.cache
+
+# Coverage / Testing
+coverage/
+
+# Lock files (optional if you don’t want to commit them)
+# package-lock.json
+# yarn.lock
