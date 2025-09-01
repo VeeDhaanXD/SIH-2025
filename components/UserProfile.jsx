@@ -1,56 +1,122 @@
-// components/UserProfile.jsx
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  FaUser,
+  FaEnvelope,
+  FaPhone,
+  FaMapMarkerAlt,
+  FaEdit,
+  FaSignOutAlt,
+  FaHeartbeat,
+  FaPassport,
+  FaShieldAlt,
+  FaAddressCard,
+} from "react-icons/fa";
+import Header from "../components/Header";
 import { Navigate } from "react-router-dom";
 
-const UserProfile = () => {
+const ProfilePage = () => {
   const [user] = useState({
-    name: "John Doe",
-    email: "johndoe@example.com",
-    role: "Traveler",
+    name: "Raj Pandey",
+    email: "rajpandey@example.com",
+    phone: "+91 8888888899",
     location: "Mumbai, India",
-    joined: "Aug 2025",
-    avatar: "https://i.pravatar.cc/150?img=3", // sample avatar
+    trips: 0,
+    favorites: 5,
+    emergencyContact: {
+      name: "Aman Pandey",
+      relation: "Brother",
+      phone: "+91 7979797979",
+    },
+    medicalInfo: "Allergic to Penicillin",
+    insuranceProvider: "TravelSecure Pvt Ltd",
+    digitalID: "TSM-2025-874392",
   });
-
+const navigate = useNavigate();
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-2xl p-6">
-      {/* Profile Header */}
-      <div className="flex flex-col items-center">
-        <img
-          src={user.avatar}
-          alt="Profile"
-          className="w-24 h-24 rounded-full border-4 border-green-500"
-        />
-        <h2 className="mt-3 text-xl font-semibold text-gray-800">{user.name}</h2>
-        <p className="text-sm text-gray-500">{user.email}</p>
-        <span className="mt-1 px-3 py-1 text-xs bg-green-100 text-green-600 rounded-full">
-          {user.role}
-        </span>
-      </div>
+    <div className="min-h-screen flex flex-col items-center bg-gradient-to-br from-green-100 via-white to-blue-100">
+      <Header />
 
-      {/* Profile Info */}
-      <div className="mt-6 space-y-3">
-        <div className="flex justify-between">
-          <span className="text-gray-600">Location:</span>
-          <span className="text-gray-800">{user.location}</span>
+      {/* Profile Card */}
+      <div className="w-[480px] bg-white shadow-2xl rounded-2xl mt-20 p-8 relative">
+        {/* Avatar */}
+        <div className="flex flex-col items-center">
+          <div className="w-28 h-28 rounded-full bg-green-200 flex items-center justify-center text-4xl font-bold text-green-700 shadow-md">
+            {user.name.charAt(0)}
+          </div>
+          <h2 className="text-2xl font-bold text-gray-800 mt-3">{user.name}</h2>
+          <p className="text-gray-500">Traveler</p>
         </div>
-        <div className="flex justify-between">
-          <span className="text-gray-600">Joined:</span>
-          <span className="text-gray-800">{user.joined}</span>
-        </div>
-      </div>
 
-      {/* Actions */}
-      <div className="mt-6 flex gap-3">
-        <button className="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg">
-          Edit Profile
-        </button>
-        <button className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg">
-          Logout
-        </button>
+        {/* Info Section */}
+        <div className="mt-6 space-y-4">
+          <div className="flex items-center gap-3 text-gray-700">
+            <FaEnvelope className="text-green-500" />
+            <span>{user.email}</span>
+          </div>
+          <div className="flex items-center gap-3 text-gray-700">
+            <FaPhone className="text-green-500" />
+            <span>{user.phone}</span>
+          </div>
+          <div className="flex items-center gap-3 text-gray-700">
+            <FaMapMarkerAlt className="text-green-500" />
+            <span>{user.location}</span>
+          </div>
+        </div>
+
+        {/* Travel Stats */}
+        <div className="flex justify-between mt-6 bg-green-50 p-4 rounded-xl">
+          <div className="text-center">
+            <p className="text-lg font-bold text-green-600">{user.trips}</p>
+            <p className="text-gray-500 text-sm">Trips</p>
+          </div>
+          <div className="text-center">
+            <p className="text-lg font-bold text-green-600">{user.favorites}</p>
+            <p className="text-gray-500 text-sm">Favorites</p>
+          </div>
+        </div>
+
+        {/* Safety & Travel Info */}
+        <div className="mt-6 space-y-4 bg-blue-50 p-4 rounded-xl">
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            Safety & Travel Info
+          </h3>
+          <div className="flex items-center gap-3 text-gray-700">
+            <FaUser className="text-blue-500" />
+            <span>
+              Emergency Contact: {user.emergencyContact.name} (
+              {user.emergencyContact.relation}) - {user.emergencyContact.phone}
+            </span>
+          </div>
+          <div className="flex items-center gap-3 text-gray-700">
+            <FaHeartbeat className="text-red-500" />
+            <span>Medical Info: {user.medicalInfo}</span>
+          </div>
+          <div className="flex items-center gap-3 text-gray-700">
+            <FaShieldAlt className="text-green-600" />
+            <span>Insurance: {user.insuranceProvider}</span>
+          </div>
+          <div className="flex items-center gap-3 text-gray-700">
+            <FaAddressCard className="text-purple-500" />
+            <span>Digital ID: {user.digitalID}</span>
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div className="mt-6 flex gap-4">
+          <button className="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg flex items-center justify-center gap-2 shadow-md">
+            <FaEdit /> Edit Profile
+          </button>
+          <button onClick={() => {
+  localStorage.clear();   // or remove only auth token
+  navigate("/");
+}} className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg flex items-center justify-center gap-2 shadow-md">
+            <FaSignOutAlt /> Logout
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default UserProfile;
+export default ProfilePage;

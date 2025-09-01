@@ -133,9 +133,10 @@ const LoginPage = () => {
           {/* Sign Up */}
           <p className="text-sm text-gray-600 text-center">
             Don’t have an account?{" "}
-            <a href="#" className="text-green-600 font-medium hover:underline">
+            <button onClick={() =>navigate("/signup")} className="text-green-600 font-medium hover:underline">
+
               Sign Up
-            </a>
+            </button>
           </p>
         </div>
       </div>
