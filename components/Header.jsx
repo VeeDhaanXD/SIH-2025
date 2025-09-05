@@ -20,9 +20,9 @@ const Header = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex space-x-8 text-gray-700 font-medium">
-          <a href="#" className="hover:text-teal-600 transition">
+          <Link to="/dashboard " className="hover:text-teal-600 transition">
             Home
-          </a>
+          </Link>
 
           <a href="#" className="hover:text-teal-600 transition">
             Contact

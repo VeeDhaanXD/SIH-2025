@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaUser, FaLock, FaSignInAlt } from "react-icons/fa";
 import { MdSecurity } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import IMG1 from "../src/img1.jpg";
+import IMG1 from "../src/img2.jpg";
 import Header from "../components/Header";
 
 const LoginPage = () => {
@@ -17,18 +17,21 @@ const LoginPage = () => {
     tourist: { userid: "tourist123", password: "pass123" },
     authority: { userid: "admin001", password: "admin123" },
   };
+const handleLogin = () => {
+  setError(""); // reset error
+  const validUser = users[role];
 
-  const handleLogin = () => {
-    setError(""); // reset error
-    const validUser = users[role];
-
-    if (userId === validUser.userid && password === validUser.password) {
-      // ✅ correct login → navigate
+  if (userId === validUser.userid && password === validUser.password) {
+    // ✅ correct login → navigate based on role
+    if (role === "tourist") {
       navigate("/dashboard");
-    } else {
-      setError("Invalid User ID or Password ❌");
+    } else if (role === "authority") {
+      navigate("/authority");
     }
-  };
+  } else {
+    setError("Invalid User ID or Password ❌");
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 relative">

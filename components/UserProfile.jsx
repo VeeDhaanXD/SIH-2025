@@ -8,17 +8,25 @@ import {
   FaEdit,
   FaSignOutAlt,
   FaHeartbeat,
-  FaPassport,
   FaShieldAlt,
   FaAddressCard,
 } from "react-icons/fa";
 import Header from "../components/Header";
-import { Navigate } from "react-router-dom";
+
+export const dummyUser = {
+  name: "Raj Pandey",
+  email: "veedhaanxd07@gmail.com",
+  role: "Tourist",
+  location: "Solapur, Maharashtra",
+  joined: "2025-08-28",
+  digitalID: "TSM-2025-874392",
+
+};
 
 const ProfilePage = () => {
   const [user] = useState({
-    name: "Raj Pandey",
-    email: "rajpandey@example.com",
+    name: dummyUser.name,          // ✅ FIXED
+    email: dummyUser.email,        // reuse dummyUser
     phone: "+91 8888888899",
     location: "Mumbai, India",
     trips: 0,
@@ -30,9 +38,11 @@ const ProfilePage = () => {
     },
     medicalInfo: "Allergic to Penicillin",
     insuranceProvider: "TravelSecure Pvt Ltd",
-    digitalID: "TSM-2025-874392",
+    ID: dummyUser.digitalID,
   });
-const navigate = useNavigate();
+
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-br from-green-100 via-white to-blue-100">
       <Header />
@@ -98,7 +108,7 @@ const navigate = useNavigate();
           </div>
           <div className="flex items-center gap-3 text-gray-700">
             <FaAddressCard className="text-purple-500" />
-            <span>Digital ID: {user.digitalID}</span>
+            <span>Digital ID: {user.ID}</span>
           </div>
         </div>
 
@@ -107,10 +117,13 @@ const navigate = useNavigate();
           <button className="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg flex items-center justify-center gap-2 shadow-md">
             <FaEdit /> Edit Profile
           </button>
-          <button onClick={() => {
-  localStorage.clear();   // or remove only auth token
-  navigate("/");
-}} className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg flex items-center justify-center gap-2 shadow-md">
+          <button
+            onClick={() => {
+              localStorage.clear();
+              navigate("/");
+            }}
+            className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg flex items-center justify-center gap-2 shadow-md"
+          >
             <FaSignOutAlt /> Logout
           </button>
         </div>
