@@ -6,6 +6,7 @@ import { MdLocationOn, MdHotel, MdLocalHospital, MdWarning, MdWbSunny } from "re
 import { IoAccessibilitySharp } from "react-icons/io5";
 import Header from "./Header";
 import Chatbot from "./Chatbot";
+import PoliceStation from "./PoliceStation";
 import DashboardWelcome from "./DashboardWelcome";
 
 const Dashboard = () => {
@@ -75,13 +76,13 @@ const Dashboard = () => {
 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
   <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg flex items-center space-x-4">
     <MdLocationOn className="text-3xl text-teal-600" />
-    <div>
+    <div onClick={() =>navigate("/Police")}>
       <h3 className="font-bold text-lg">Nearby Police</h3>
       <p className="text-gray-600">Check nearest police stations</p>
     </div>
   </div>
 
-  <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg flex items-center space-x-4">
+  <div onClick={()=> navigate("/hotels")} className="bg-white p-6 rounded-xl shadow hover:shadow-lg flex items-center space-x-4">
     <MdHotel className="text-3xl text-teal-600" />
     <div>
       <h3 className="font-bold text-lg">Nearby Hotels</h3>

@@ -1,10 +1,13 @@
-import React from "react";
-import { FaExclamationTriangle } from "react-icons/fa";
+import React, { use } from "react";
+import { FaExclamationTriangle , FaArrowLeft} from "react-icons/fa";
+
 import { jsPDF } from "jspdf";
 import { dummyUser } from "./UserProfile";
 import emailjs from "emailjs-com";
+import { useNavigate } from "react-router-dom";
 
 const EmergencyButton = () => {
+  const navigate = useNavigate();
   // ✅ Static test user details
   const user = {
    name: dummyUser.name,
@@ -114,6 +117,12 @@ Please check the attached PDF for full details.
 
   return (
     <div className="min-h-screen flex items-center justify-center">
+      <header> <button
+                onClick={() => navigate("/dashboard")}
+                className="mr-3 text-teal-600 hover:text-teal-700"
+              >
+                <FaArrowLeft size={20} />
+              </button></header>
   <button
     onClick={handleEmergency}
     className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg text-lg font-semibold"
