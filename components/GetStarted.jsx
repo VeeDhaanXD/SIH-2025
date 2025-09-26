@@ -49,7 +49,7 @@ export default function GetStartedPage() {
           <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-400">
             A proactive, AI-powered platform for ensuring tourist safety and managing incident response with unparalleled efficiency and immutable logging.
           </p>
-          <Link to="/">
+          <Link to="/login">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

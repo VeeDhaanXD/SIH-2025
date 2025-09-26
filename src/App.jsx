@@ -23,7 +23,7 @@ import GetStarted from "../components/GetStarted.jsx";
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<LoginPage />} />
+      <Route path="/" element={<GetStarted />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/userProfile" element={<UserProfile />} />
       <Route path="/weather" element={<WeatherPage />} />
@@ -42,7 +42,7 @@ const App = () => {
       <Route path="/touristdb" element={<TouristDB/>} />
       <Route path="/idt" element={<IncidentManager/>} />
       <Route path="/App" element={<TouristAppView/>} />
-      <Route path="/st" element={<GetStarted/>} />
+      <Route path="/login" element={<LoginPage/>} />
     </Routes>
   );
 };
