@@ -4,12 +4,14 @@ import { MdLocationOn } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import IMG1 from "../src/img1.jpg"; 
 import Header from "./Header";
+import axios from "axios";
+
 
 const SignupPage = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     email: "",
     phone: "",
     password: "",
@@ -26,14 +28,16 @@ const SignupPage = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSignup = () => {
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match ❌");
-      return;
+  const handleSignup = async () => {
+    try {
+      const res = await axios.post("http://localhost:5000/auth/signup", formData);
+      alert(res.data.message);
+      if (res.data.message === "User registered successfully") {
+        navigate("/");
+      }
+    } catch (err) {
+      alert("Something went wrong!");
     }
-    // ✅ later connect to backend
-    console.log("KYC Signup Data:", formData);
-    navigate("/dashboard");
   };
 
   return (
@@ -70,9 +74,9 @@ const SignupPage = () => {
               <FaUser className="text-gray-400 mr-2" />
               <input
                 type="text"
-                name="fullName"
+                name="name"
                 placeholder="Full Name"
-                value={formData.fullName}
+                value={formData.name}
                 onChange={handleChange}
                 className="w-full outline-none bg-transparent"
               />

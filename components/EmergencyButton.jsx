@@ -116,19 +116,33 @@ Please check the attached PDF for full details.
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <header> <button
-                onClick={() => navigate("/dashboard")}
-                className="mr-3 text-teal-600 hover:text-teal-700"
-              >
-                <FaArrowLeft size={20} />
-              </button></header>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-900 to-black relative text-center px-4">
+  {/* Back Button */}
+  <header className="absolute top-5 left-5">
+    <button
+      onClick={() => navigate("/dashboard")}
+      className="flex items-center text-gray-300 hover:text-white transition"
+    >
+      <FaArrowLeft size={22} className="mr-2" />
+      <span className="text-sm">Back</span>
+    </button>
+  </header>
+
+  {/* Title */}
+  <h1 className="text-3xl font-bold text-white mb-8 tracking-wide">
+    🚨 Emergency Action
+  </h1>
+
+  {/* Emergency Button */}
   <button
     onClick={handleEmergency}
-    className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg text-lg font-semibold"
+    className="bg-red-600 hover:bg-red-700 active:scale-95 text-white px-10 py-5 rounded-full flex items-center gap-3 shadow-2xl text-2xl font-bold tracking-wide animate-pulse"
   >
-    <FaExclamationTriangle /> Emergency
+    <FaExclamationTriangle className="text-3xl" />
+    Emergency
   </button>
+
+
 </div>
 
   );

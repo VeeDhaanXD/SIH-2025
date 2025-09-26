@@ -4,6 +4,9 @@ import { MdSecurity } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import IMG1 from "../src/img2.jpg";
 import Header from "../components/Header";
+import axios from "axios";
+
+
 
 const LoginPage = () => {
   const [role, setRole] = useState("tourist");
@@ -11,27 +14,57 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [name ,setName]  = useState("");
+
 
   // ✅ Dummy Users DB
   const users = {
     tourist: { userid: "tourist123", password: "pass123" },
     authority: { userid: "admin001", password: "admin123" },
   };
-const handleLogin = () => {
-  setError(""); // reset error
-  const validUser = users[role];
 
-  if (userId === validUser.userid && password === validUser.password) {
-    // ✅ correct login → navigate based on role
-    if (role === "tourist") {
-      navigate("/dashboard");
-    } else if (role === "authority") {
-      navigate("/authority");
+
+const handleLogin = async () => {
+  setError(""); // reset error
+
+  try {
+    const res = await axios.post("http://localhost:5000/auth/login", {
+      name,
+      password,
+      role,
+    });
+
+    if (res.data.message === "Login successful") {
+      if (role === "tourist") {
+        navigate("/dashboard");
+      } else if (role === "authority") {
+        navigate("/authority");
+      }
+    } else {
+      setError("Invalid User ID or Password ❌");
     }
-  } else {
-    setError("Invalid User ID or Password ❌");
+  } catch (err) {
+    setError("Server error while logging in ❌");
   }
 };
+
+
+
+// const handleLogin = () => {
+//   setError(""); // reset error
+//   const validUser = users[role];
+
+//   if (userId === validUser.userid && password === validUser.password) {
+//     // ✅ correct login → navigate based on role
+//     if (role === "tourist") {
+//       navigate("/dashboard");
+//     } else if (role === "authority") {
+//       navigate("/authority");
+//     }
+//   } else {
+//     setError("Invalid User ID or Password ❌");
+//   }
+// };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 relative">
@@ -93,8 +126,8 @@ const handleLogin = () => {
               <input
                 type="text"
                 placeholder="User ID"
-                value={userId}
-                onChange={(e) => setUserId(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="w-full outline-none bg-transparent"
               />
             </div>

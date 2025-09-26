@@ -62,7 +62,7 @@ const Dashboard = () => {
   </div>
   <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg flex items-center space-x-4">
     <IoAccessibilitySharp className="text-3xl text-blue-500" />
-    <div onClick={() => navigate("/emergency")}>
+    <div>
       <h3 className="font-bold text-lg">Idle Button</h3>
       <p className="text-gray-600">Play / Pause</p>
     </div>
@@ -100,7 +100,7 @@ const Dashboard = () => {
 
   <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg flex items-center space-x-4">
     <MdWarning className="text-3xl text-black-200" />
-    <div>
+    <div onClick={() => navigate("/geo")}>
       <h3 className="font-bold text-lg">Restricted Areas</h3>
       <p className="text-gray-600">Avoid unsafe zones</p>
     </div>
